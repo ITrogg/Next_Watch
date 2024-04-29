@@ -1,6 +1,7 @@
 import Card from "./card"
+import PropTypes from "prop-types";
 
-const Main = () => {
+const Main = ({data}) => {
   return (
     <main>
       <h2>Toutes les séries</h2>
@@ -15,18 +16,16 @@ const Main = () => {
         </label>
       </form>
       <section className="cards">
-        <Card index={0}></Card>
-        <Card index={1}></Card>
-        <Card index={2}></Card>
-        <Card index={0}></Card>
-        <Card index={1}></Card>
-        <Card index={2}></Card>
-        <Card index={0}></Card>
-        <Card index={1}></Card>
-        <Card index={2}></Card>
+       {data.map((serie) => (
+        <Card infos={serie} key={serie.title} ></Card>
+       ))}
       </section>
     </main>
   )
+}
+
+Main.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
 }
 
 export default Main

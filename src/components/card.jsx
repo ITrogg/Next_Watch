@@ -1,34 +1,10 @@
 import PropTypes from "prop-types";
 import '../styles/card.css'
 
-const data = [
-  {
-    title : "Hasbin Hôtel",
-    img : "https://image.tmdb.org/t/p/w600_and_h900_bestv2/rXojaQcxVUubPLSrFV8PD4xdjrs.jpg",
-    description : "Charlie Morningstar, la Princesse de l'Enfer, lutte pour convaincre les démons et les anges que n'importe quelle âme peut être rachetée. Venez chanter devant cette comédie musicale animée pour adultes sur la rédemption.",
-    date : 2024,
-    episodesStatus : [[true, true, true, true, false, false, false, false]],
-    isFollowed : true,
-  },
-  {
-    title : "The Last of us",
-    img : "https://image.tmdb.org/t/p/w600_and_h900_bestv2/eIQqqWFBtzKFfcxuuemtRNtoIkN.jpg",
-    description : "Vingt ans après la destruction de la civilisation moderne, Joel, un survivant endurci, est engagé pour faire sortir Ellie, une jeune fille de 14 ans, d'une zone de quarantaine oppressante. Ce qui n'est au départ qu'un petit travail se transforme rapidement en un voyage brutal et époustouflant, alors que ce duo improbable dépend de l'autre pour sa survie.",
-    date : 2023,
-    episodesStatus :[[false, false, false, false, false, false, false, false, false]],
-  },
-  {
-    title : "The Last of us",
-    img : "https://image.tmdb.org/t/p/w600_and_h900_bestv2/eIQqqWFBtzKFfcxuuemtRNtoIkN.jpg",
-    description : "Vingt ans après la destruction de la civilisation moderne, Joel, un survivant endurci, est engagé pour faire sortir Ellie, une jeune fille de 14 ans, d'une zone de quarantaine oppressante. Ce qui n'est au départ qu'un petit travail se transforme rapidement en un voyage brutal et époustouflant, alors que ce duo improbable dépend de l'autre pour sa survie.",
-    date : 2023,
-    episodesStatus :[[false, false, false, false, false, false, false, false, false]],
-  },
-]
-
-const Card = ({index}) => {
-  const buttonMessage = () => {
-    if (!data[index].isFollowed) {
+const Card = ({infos, key}) => {
+  
+  const buttonMessage = (isFollowed) => {
+    if (!isFollowed) {
       return "Premier épisode visionné"
     }
     return "Episode visionné"
@@ -45,25 +21,27 @@ const Card = ({index}) => {
         episode = episode + 1;
       }
       episode = 1
-      season = season + i;
+      season = season + 1;
     }
   }
-  
+  console.log (infos)
+  console.log (key)
   return (
     <article>
-      <img src={data[index].img} alt={`Affiche de la dernière saison ${data[index].title}`} />
+      <img src={infos.img} alt={`Affiche de la dernière saison ${infos.title}`} />
       <div className="infos">
-        <h3>{data[index].title}</h3>
-        <p>{data[index].episodesStatus.length} saison(s)</p>
-        {!data[index].episodesStatus[0][0] ? (<p>{data[index].description}</p>):(<p>prochain épisode à voir : <br /> {nextEpisode(data[index].episodesStatus)}</p>)}
-        <button>{buttonMessage(index)}</button>
+        <h3>{infos.title}</h3>
+        <p>{infos.episodesStatus.length} saison(s)</p>
+        {!infos.episodesStatus[0][0] ? (<p>{infos.description}</p>):(<p>prochain épisode à voir : <br /> {nextEpisode(infos.episodesStatus)}</p>)}
+        <button>{buttonMessage(infos.isFollowed)}</button>
       </div>
     </article>
   )
 }
 
 Card.propTypes = {
-  index: PropTypes.number.isRequired,
+  infos : PropTypes.object,
+  key : PropTypes.string,
 }
 
 export default Card;
