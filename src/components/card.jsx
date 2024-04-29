@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import '../styles/card.css'
 
 const data = [
   {
@@ -51,10 +52,12 @@ const Card = ({index}) => {
   return (
     <article>
       <img src={data[index].img} alt={`Affiche de la dernière saison ${data[index].title}`} />
-      <h3>{data[index].title}</h3>
-      <p>{data[index].episodesStatus.length} saison(s)</p>
-      {!data[index].episodesStatus[0][0] ? (<p>{data[index].description}</p>):(<p>prochain épisode à voir : <br /> {nextEpisode(data[index].episodesStatus)}</p>)}
-      <button>{buttonMessage(index)}</button>
+      <div className="infos">
+        <h3>{data[index].title}</h3>
+        <p>{data[index].episodesStatus.length} saison(s)</p>
+        {!data[index].episodesStatus[0][0] ? (<p>{data[index].description}</p>):(<p>prochain épisode à voir : <br /> {nextEpisode(data[index].episodesStatus)}</p>)}
+        <button>{buttonMessage(index)}</button>
+      </div>
     </article>
   )
 }
