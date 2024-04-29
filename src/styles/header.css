@@ -1,0 +1,21 @@
+header {
+  background-color: blue;
+  height: 10vh;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  h1 {
+    align-self: flex-start;
+    font-size: 3.5rem;
+  }
+  ul {
+    display: flex;
+    list-style: none;
+    justify-content: space-evenly;
+    width: 75%;
+  }
+  img {
+    height: 75%;
+  }
+}

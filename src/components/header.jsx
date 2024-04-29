@@ -1,4 +1,5 @@
 import Avatar from "../assets/Avatar.png"
+import '../styles/header.css'
 
 const Header = () => {
   return (

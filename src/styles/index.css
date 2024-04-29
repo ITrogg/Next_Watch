@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Changa:wght@200..800&family=Sedgwick+Ave+Display&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-style: none;
+  text-decoration: none;
+  color: black;
+  font-family: "Changa", sans-serif;
+  --main-color: red;
+}
