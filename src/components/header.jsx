@@ -1,6 +1,16 @@
+import Avatar from "../assets/Avatar.png"
+
 const Header = () => {
   return (
-    <header>Bonjour</header>
+    <header>
+      <h1>Watch This !</h1>
+      <ul>
+        <li>Découvrir</li>
+        <li>Séries suivies</li>
+        <li>Toutes mes séries</li>
+      </ul>
+      <img src={Avatar} alt="" />
+    </header>
   )
 }
 
