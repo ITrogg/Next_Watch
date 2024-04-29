@@ -3,17 +3,20 @@ import '../styles/card.css'
 
 const Card = ({infos, key}) => {
   
-  const buttonMessage = (isFollowed) => {
-    if (!isFollowed) {
-      return "Premier épisode visionné"
+  const buttonMessage = (allEpisodes) => {
+    for (let i = 0; i < allEpisodes.length; i++){
+      for (let j = 0; j < allEpisodes[i].length; j++){
+        if (!allEpisodes[i][j]){
+          return "Premier épisode visionné"
+        }
+        return "Episode visionné"
+      }
     }
-    return "Episode visionné"
   }
-
+    
   const nextEpisode = (allEpisodes) => {
     let episode = 1, season = 1
     for (let i = 0; i < allEpisodes.length; i++){
-      console.log (allEpisodes[i])
       for (let j = 0; j < allEpisodes[i].length; j++){
         if (!allEpisodes[i][j]){
           return `épisode ${episode} saison ${season}` 
@@ -33,7 +36,7 @@ const Card = ({infos, key}) => {
         <h3>{infos.title}</h3>
         <p>{infos.episodesStatus.length} saison(s)</p>
         {!infos.episodesStatus[0][0] ? (<p>{infos.description}</p>):(<p>prochain épisode à voir : <br /> {nextEpisode(infos.episodesStatus)}</p>)}
-        <button>{buttonMessage(infos.isFollowed)}</button>
+        <button>{buttonMessage(infos.episodesStatus)}</button>
       </div>
     </article>
   )

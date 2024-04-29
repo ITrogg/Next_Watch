@@ -1,7 +1,7 @@
 import Card from "./card"
 import PropTypes from "prop-types";
 
-const Main = ({data}) => {
+const Main = ({nav, data}) => {
   return (
     <main>
       <h2>Toutes les séries</h2>
@@ -16,7 +16,15 @@ const Main = ({data}) => {
         </label>
       </form>
       <section className="cards">
-       {data.map((serie) => (
+       {data.filter((serie) => {
+          if (nav === 2){
+            return serie.isFollowed;
+          } else if (nav === 1){
+            return serie.episodesStatus[0][0]; 
+          } else {
+            return true
+          }
+        }).map((serie) => (
         <Card infos={serie} key={serie.title} ></Card>
        ))}
       </section>
@@ -26,6 +34,7 @@ const Main = ({data}) => {
 
 Main.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  nav : PropTypes.number
 }
 
 export default Main
