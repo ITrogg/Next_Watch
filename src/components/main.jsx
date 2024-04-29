@@ -1,11 +1,22 @@
 import Card from "./card"
 import PropTypes from "prop-types";
 
-const Main = ({nav, data, setData}) => {
+const Main = ({nav, data, followedTitles, setFollow, currentEpisodes, setCurrent}) => {
+  const title = () => {
+    switch (nav) {
+      case 'All':
+        return <h2>Toutes les séries</h2> 
+      case 'Followed':
+        return <h2>Séries en cours</h2>
+      case 'inProgress':
+        return <h2>Séries suivies</h2>
+      default:
+        return <h2>Séries</h2>
+}
+  }
   return (
     <main>
-      {/*! Add a switch  */}
-      <h2>Toutes les séries</h2>
+      {title()}
       <form action="">
         <label htmlFor="">
           Tier par :
@@ -26,7 +37,7 @@ const Main = ({nav, data, setData}) => {
             return true
           }
         }).map((serie) => (
-        <Card infos={serie} setData={setData} key={serie.title} ></Card>
+        <Card infos={serie} followedTitles={followedTitles} setFollow={setFollow} currentEpisodes={currentEpisodes} setCurrent={setCurrent} key={serie.title} ></Card>
        ))}
       </section>
     </main>
@@ -34,9 +45,19 @@ const Main = ({nav, data, setData}) => {
 }
 
 Main.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  data: PropTypes.arrayOf(PropTypes.shape({
+    img: PropTypes.string,
+    title: PropTypes.string,
+    description : PropTypes.string,
+    nbSeasons : PropTypes.number,
+    nbEpisodes : PropTypes.array,
+    lastSeen : PropTypes.array,
+  })),
   nav : PropTypes.string,
-  setData : PropTypes.func,
+  followedTitles : PropTypes.array,
+  setFollow: PropTypes.func,
+  currentEpisodes: PropTypes.array,
+  setCurrent: PropTypes.func,
 }
 
 export default Main

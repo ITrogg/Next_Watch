@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import '../styles/card.css'
 
-const Card = ({infos}) => {
+const Card = ({infos, followedTitles, currentEpisodes}) => {
   const totalEpisodes = () => {
     let total = 0;
     for (let i = 0; i < infos.nbEpisodes.length; i++){
@@ -9,15 +9,18 @@ const Card = ({infos}) => {
     }
     return total
   }
+  const currentEpisode = currentEpisodes.find((element) => element.title === infos.title);
   const progress = () => {
-    let count = infos.lastSeen[1];
-    for (let i = 0; i < infos.lastSeen[0]-1; i++) {
+    if (currentEpisode === undefined) {
+      return 0
+    }
+    let count = currentEpisode.current[1];
+    for (let i = 0; i < currentEpisode.current[0]-1; i++) {
       count = count + infos.nbEpisodes[i];      
     }
     return count;
   }
-
-
+console.log(followedTitles)
   return (
     <article>
       <img src={infos.img} alt={`Affiche de la dernière saison de ${infos.title}`} />
@@ -26,14 +29,14 @@ const Card = ({infos}) => {
         {infos.nbSeasons !== 1 ? (<p>{infos.nbSeasons} saisons</p>):(<p>{infos.nbSeasons} saison</p>)}
         {infos.isFollowed ? (
           <>
-          <progress max={totalEpisodes()} value={progress()}>70%</progress> 
-            <p>Dernier épisode visionné : <br />{`saison ${infos.lastSeen[0]}, épisode ${infos.lastSeen[1]}`}</p>
-            <button>épisode suivant</button>
+          <progress max={totalEpisodes()} value={progress()}></progress> 
+            <p>Dernier épisode visionné : <br />{`saison ${currentEpisode[0]}, épisode ${currentEpisode[1]}`}</p>
+            <button onClick={""}>épisode suivant</button>
           </>
         ):(
           <>
           <p>{infos.description}</p>
-          <button>commencer à suivre</button>
+          <button onClick={""}>commencer à suivre</button>
           </>
         )}
       </div>
@@ -51,6 +54,8 @@ Card.propTypes = {
     lastSeen : PropTypes.array,
     isFollowed: PropTypes.bool,
   }).isRequired,
+  followedTitles : PropTypes.array,
+  currentEpisodes: PropTypes.array,
 }
 
 export default Card;

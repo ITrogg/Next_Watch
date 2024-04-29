@@ -8,8 +8,8 @@ const Header = ({setNav}) => {
       <h1>Watch This !</h1>
       <ul>
         <li onClick={() => setNav("All")}>Découvrir</li>
-        <li onClick={() => setNav("inProgress")}>Séries suivies</li>
-        <li onClick={() => setNav("Followed")}>Toutes mes séries</li>
+        <li onClick={() => setNav("inProgress")}>Séries en cours</li>
+        <li onClick={() => setNav("Followed")}>Séries suivies</li>
       </ul>
       <img src={Avatar} alt="Avatar" />
     </header>
