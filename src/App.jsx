@@ -5,11 +5,12 @@ import Data from './data.js'
 import { useState } from 'react'
 
 function App() {
-  const [nav, setNav] = useState(0)
+  const [nav, setNav] = useState("All");
+
   return (
     <>
       <Header nav={nav} setNav={setNav}></Header>
-      <Main nav={nav} data={Data}></Main>
+      <Main nav={nav} data={Data} episodesStatus ></Main>
     </>
   )
 }

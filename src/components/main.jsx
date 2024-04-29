@@ -17,10 +17,10 @@ const Main = ({nav, data}) => {
       </form>
       <section className="cards">
        {data.filter((serie) => {
-          if (nav === 2){
+          if (nav === "Followed"){
             return serie.isFollowed;
-          } else if (nav === 1){
-            return serie.episodesStatus[0][0]; 
+          } else if (nav === "inProgress"){
+            return serie.lastSeen; 
           } else {
             return true
           }
@@ -34,7 +34,7 @@ const Main = ({nav, data}) => {
 
 Main.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  nav : PropTypes.number
+  nav : PropTypes.string,
 }
 
 export default Main
