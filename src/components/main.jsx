@@ -1,9 +1,10 @@
 import Card from "./card"
 import PropTypes from "prop-types";
 
-const Main = ({nav, data}) => {
+const Main = ({nav, data, setData}) => {
   return (
     <main>
+      {/*! Add a switch  */}
       <h2>Toutes les séries</h2>
       <form action="">
         <label htmlFor="">
@@ -25,7 +26,7 @@ const Main = ({nav, data}) => {
             return true
           }
         }).map((serie) => (
-        <Card infos={serie} key={serie.title} ></Card>
+        <Card infos={serie} setData={setData} key={serie.title} ></Card>
        ))}
       </section>
     </main>
@@ -35,6 +36,7 @@ const Main = ({nav, data}) => {
 Main.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
   nav : PropTypes.string,
+  setData : PropTypes.func,
 }
 
 export default Main

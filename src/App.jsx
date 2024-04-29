@@ -6,11 +6,13 @@ import { useState } from 'react'
 
 function App() {
   const [nav, setNav] = useState("All");
+  const [data, setData] = useState(Data);
+  
 
   return (
     <>
       <Header nav={nav} setNav={setNav}></Header>
-      <Main nav={nav} data={Data} episodesStatus ></Main>
+      <Main nav={nav} data={data} setData={setData} ></Main>
     </>
   )
 }
