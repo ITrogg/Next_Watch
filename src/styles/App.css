@@ -1,0 +1,9 @@
+h2 {
+  text-align: center;
+}
+main {
+  padding:0 10px;
+}
+.cards {
+  display: flex;
+}

@@ -14,8 +14,11 @@ const Main = () => {
           </select>
         </label>
       </form>
-      <Card index={0}></Card>
-      <Card index={1}></Card>
+      <section className="cards">
+        <Card index={0}></Card>
+        <Card index={1}></Card>
+        <Card index={2}></Card>
+      </section>
     </main>
   )
 }
