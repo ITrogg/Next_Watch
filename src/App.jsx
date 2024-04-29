@@ -5,7 +5,7 @@ import Data from './data.js'
 import { useState } from 'react'
 
 function App() {
-  const [nav, setNav] = useState("")
+  const [nav, setNav] = useState(0)
   return (
     <>
       <Header nav={nav} setNav={setNav}></Header>
@@ -15,3 +15,4 @@ function App() {
 }
 
 export default App
+

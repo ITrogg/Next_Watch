@@ -3,18 +3,7 @@ import '../styles/card.css'
 
 const Card = ({infos, key}) => {
   
-  const buttonMessage = (allEpisodes) => {
-    for (let i = 0; i < allEpisodes.length; i++){
-      for (let j = 0; j < allEpisodes[i].length; j++){
-        if (!allEpisodes[i][j]){
-          return "Premier épisode visionné"
-        }
-        return "Episode visionné"
-      }
-    }
-  }
-    
-  const nextEpisode = (allEpisodes) => {
+  const currentEpisode = (allEpisodes) => {
     let episode = 1, season = 1
     for (let i = 0; i < allEpisodes.length; i++){
       for (let j = 0; j < allEpisodes[i].length; j++){
@@ -35,16 +24,22 @@ const Card = ({infos, key}) => {
       <div className="infos">
         <h3>{infos.title}</h3>
         <p>{infos.episodesStatus.length} saison(s)</p>
-        {!infos.episodesStatus[0][0] ? (<p>{infos.description}</p>):(<p>prochain épisode à voir : <br /> {nextEpisode(infos.episodesStatus)}</p>)}
-        <button>{buttonMessage(infos.episodesStatus)}</button>
+        <p>{currentEpisode(infos.episodesStatus)}</p>
+        {infos.isFollowed ? ( <button>épisode suivant</button> ): ( <button>commencer à suivre</button> )}
       </div>
     </article>
   )
 }
 
 Card.propTypes = {
-  infos : PropTypes.object,
-  key : PropTypes.string,
+  infos: PropTypes.shape({
+    img: PropTypes.string,
+    title: PropTypes.string,
+    episodesStatus: PropTypes.array,
+    isFollowed: PropTypes.bool
+  }).isRequired,
+  key : PropTypes,
 }
 
 export default Card;
+
