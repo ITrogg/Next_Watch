@@ -1,19 +1,25 @@
 header {
-  background-color: blue;
+  background-color: var(--main-color);
   height: 10vh;
   padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   h1 {
+    color: var(--light-text-color);
     align-self: flex-start;
-    font-size: 3.5rem;
+    font-size: 5rem;
+    transform: rotate(-4deg);
+    font-family: "Sedgwick Ave Display", cursive;
   }
   ul {
     display: flex;
     list-style: none;
     justify-content: space-evenly;
     width: 75%;
+  }
+  li {
+    color : var(--light-text-color);
   }
   img {
     height: 75%;

@@ -6,8 +6,16 @@
   box-sizing: border-box;
   font-style: none;
   text-decoration: none;
-  color: black;
   font-family: "Changa", sans-serif;
-  --main-color: red;
   line-height: 1;
+  --main-color: #4281A4 ;
+  --card-color : rgb(1, 22, 56);
+  --light-text-color : #E3DFFF;
+  --dark-text-color: #000c1f;
+  --button-color: #4281A4;
+}
+
+body {
+  background: rgb(197,193,228);
+  background: linear-gradient(120deg, rgba(197,193,228,1) 0%, rgba(214,212,230,1) 16%, rgba(227,223,255,1) 26%, rgba(213,209,236,1) 39%, rgba(220,216,249,1) 52%, rgba(224,223,228,1) 68%, rgba(227,223,255,1) 84%); 
 }
