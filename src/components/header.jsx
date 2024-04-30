@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const Header = ({setNav}) => {
   return (
     <header>
-      <h1>Watch This !</h1>
+      <h1>Next Watch!</h1>
       <ul>
         <li onClick={() => setNav("All")}>Découvrir</li>
         <li onClick={() => setNav("inProgress")}>Séries en cours</li>
