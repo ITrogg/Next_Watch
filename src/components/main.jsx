@@ -5,42 +5,28 @@ import PropTypes from "prop-types";
 const Main = ({nav, data, startFollow, nextEpisode}) => {
   const [sortValue, setSortValue] = useState("");
   const [sortedData, setSortedData] = useState(data);
-
+  const handleSort = event => {
+    setSortValue(event.target.value);
+  };
   useEffect(() => {
     // Sort data when sortValue changes
     const sorted = [...data].sort((a, b) => compare(a, b, sortValue));
     setSortedData(sorted);
   }, [sortValue, data]);
 
-  const handleSort = event => {
-    setSortValue(event.target.value);
-  };
-
-  const title = () => {
-    switch (nav) {
-      case 'All':
-        return <h2>Toutes les séries</h2> 
-      case 'Followed':
-        return <h2>Séries en cours</h2>
-      case 'inProgress':
-        return <h2>Séries suivies</h2>
-      default:
-        return <h2>Séries</h2>
+  const calculProgress = (infos) => {
+    let total = 0;
+    for (let i = 0; i < infos.nbEpisodes.length; i++){
+      total = total + infos.nbEpisodes[i];
     }
+    let count = infos.lastSeen[1];
+    for (let i = 0; i < infos.lastSeen[0]-1; i++) {
+      count = count + infos.nbEpisodes[i];      
+    }
+    const progress = count/total*100;
+    return progress;
   }
-
   const compare = (a, b, param) => {
-    const maxA = a.nbEpisodes.reduce((a,b) => a + b,0);
-    const maxB = b.nbEpisodes.reduce((a,b) => a + b,0);
-    let progressA = a.lastSeen[1];
-    let progressB = b.lastSeen[1];
-    for (let i = 0; i < a.lastSeen[0]-1; i++) {
-      progressA += a.nbEpisodes[i];     
-    }
-    for (let i = 0; i < b.lastSeen[0]-1; i++) {
-      progressB += b.nbEpisodes[i];     
-    }
-
     switch (param) {
       case 'alphabet':
         if (a.title < b.title)
@@ -55,16 +41,27 @@ const Main = ({nav, data, startFollow, nextEpisode}) => {
           return 1;
         return 0; 
       case 'progress':
-        if ((progressA/maxA) > (progressB/maxB))
+        if ((calculProgress(a)) > (calculProgress(b)))
           return -1;
-        if ((progressA/maxA) < (progressB/maxB))
+        if ((calculProgress(a)) < (calculProgress(b)))
           return 1;
         return 0;
       default:
         return 0;
     } 
   }
-
+  const title = () => {
+    switch (nav) {
+      case 'All':
+        return <h2>Toutes les séries</h2> 
+      case 'Followed':
+        return <h2>Séries en cours</h2>
+      case 'inProgress':
+        return <h2>Séries suivies</h2>
+      default:
+        return <h2>Séries</h2>
+    }
+  }  
   return (
     <main>
       {title()}
@@ -87,7 +84,7 @@ const Main = ({nav, data, startFollow, nextEpisode}) => {
             return true
           }
         }).map((serie) => (
-          <Card infos={serie} data={data} nextEpisode={nextEpisode} startFollow={startFollow} key={serie.title} ></Card>
+          <Card infos={serie} data={data} nextEpisode={nextEpisode} startFollow={startFollow} calculProgress={calculProgress} key={serie.title} ></Card>
         ))}
       </section>
     </main>

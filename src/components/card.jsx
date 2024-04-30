@@ -1,21 +1,8 @@
 import PropTypes from "prop-types";
 import '../styles/card.css';
 
-const Card = ({infos,  nextEpisode, startFollow}) => {
+const Card = ({infos,  nextEpisode, startFollow, calculProgress}) => {
 
-
-  const calculProgress = () => {
-    let total = 0;
-    for (let i = 0; i < infos.nbEpisodes.length; i++){
-      total = total + infos.nbEpisodes[i];
-    }
-    let count = infos.lastSeen[1];
-    for (let i = 0; i < infos.lastSeen[0]-1; i++) {
-      count = count + infos.nbEpisodes[i];      
-    }
-    const progress = count/total*100;
-    return progress;
-  }
   return (
     <article>
       <img src={infos.img} alt={`Affiche de la dernière saison de ${infos.title}`} />
@@ -24,7 +11,7 @@ const Card = ({infos,  nextEpisode, startFollow}) => {
         {infos.nbSeasons !== 1 ? (<p>{infos.nbSeasons} saisons</p>):(<p>{infos.nbSeasons} saison</p>)}
         {infos.isFollowed ? (
           <>
-          <progress max="100" value={calculProgress()}></progress> 
+            <progress max="100" value={calculProgress(infos)}></progress> 
             <p>Dernier épisode visionné : <br />{`saison ${infos.lastSeen[0]}, épisode ${infos.lastSeen[1]}`}</p>
             <button onClick={() => {nextEpisode(infos.title)}}>épisode suivant</button>
           </>
@@ -53,6 +40,7 @@ Card.propTypes = {
   currentEpisodes: PropTypes.array,
   nextEpisode: PropTypes.func,
   startFollow: PropTypes.func,
+  calculProgress: PropTypes.func,
 }
 
 export default Card;
