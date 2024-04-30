@@ -21,11 +21,13 @@ function App() {
   const nextEpisode = (target) => {
     setData(data.map(serie => {
       if (serie.title === target){
-        if (serie.lastSeen[1] < serie.nbEpisodes[serie.lastSeen[0]-1]){
-          serie.lastSeen[1] ++;
-        } else {
-          serie.lastSeen[0] ++;
+        if (serie.lastSeen[0] <= serie.nbSeasons && serie.lastSeen[1] < serie.nbEpisodes[serie.lastSeen[0] - 1]){
+          serie.lastSeen[1]++;
+        } else if (serie.lastSeen[0] < serie.nbSeasons) {
+          serie.lastSeen[0]++;
           serie.lastSeen[1] = 1;
+        } else {
+          return serie;
         }
       }
       return serie;

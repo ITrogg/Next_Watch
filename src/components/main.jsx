@@ -58,9 +58,9 @@ const Main = ({nav, data, startFollow, nextEpisode}) => {
       case 'All':
         return <h2>Toutes les séries</h2> 
       case 'Followed':
-        return <h2>Séries en cours</h2>
-      case 'inProgress':
         return <h2>Séries suivies</h2>
+      case 'inProgress':
+        return <h2>Séries en cours</h2>
       default:
         return <h2>Séries</h2>
     }
@@ -82,7 +82,7 @@ const Main = ({nav, data, startFollow, nextEpisode}) => {
           if (nav === "Followed"){
             return serie.isFollowed;
           } else if (nav === "inProgress"){
-            return serie.lastSeen; 
+            return (calculProgress(serie) < 100 && calculProgress(serie) > 0); 
           } else {
             return true
           }
@@ -95,18 +95,10 @@ const Main = ({nav, data, startFollow, nextEpisode}) => {
 }
 
 Main.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({
-    img: PropTypes.string,
-    title: PropTypes.string,
-    description : PropTypes.string,
-    nbSeasons : PropTypes.number,
-    nbEpisodes : PropTypes.array,
-    lastSeen : PropTypes.array,
-  })),
+  data: PropTypes.array,
   nav : PropTypes.string,
   followedTitles : PropTypes.array,
   startFollow: PropTypes.func,
-  currentEpisodes: PropTypes.array,
   nextEpisode: PropTypes.func,
 }
 

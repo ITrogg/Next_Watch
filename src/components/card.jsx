@@ -40,7 +40,6 @@ Card.propTypes = {
     lastSeen : PropTypes.array,
     isFollowed: PropTypes.bool,
   }).isRequired,
-  currentEpisodes: PropTypes.array,
   nextEpisode: PropTypes.func,
   startFollow: PropTypes.func,
   calculProgress: PropTypes.func,
