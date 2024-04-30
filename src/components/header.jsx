@@ -1,5 +1,4 @@
 import Avatar from "../assets/Avatar.png"
-import '../styles/header.css'
 import PropTypes from "prop-types";
 
 const Header = ({setNav}) => {

@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import Card from "./card"
 import PropTypes from "prop-types";
+import '../styles/header.css';
+import '../styles/App.css';
+import '../styles/card.css';
 
 const Main = ({nav, data, startFollow, nextEpisode}) => {
   const [sortValue, setSortValue] = useState("");

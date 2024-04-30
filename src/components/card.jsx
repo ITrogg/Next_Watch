@@ -1,26 +1,29 @@
 import PropTypes from "prop-types";
-import '../styles/card.css';
 
 const Card = ({infos,  nextEpisode, startFollow, calculProgress}) => {
 
   return (
     <article>
       <img src={infos.img} alt={`Affiche de la dernière saison de ${infos.title}`} />
-      <div className="infos">
-        <h3>{infos.title}</h3>
-        {infos.nbSeasons !== 1 ? (<p>{infos.nbSeasons} saisons</p>):(<p>{infos.nbSeasons} saison</p>)}
-        {infos.isFollowed ? (
-          <>
-            <progress max="100" value={calculProgress(infos)}></progress> 
-            <p>Dernier épisode visionné : <br />{`saison ${infos.lastSeen[0]}, épisode ${infos.lastSeen[1]}`}</p>
-            <button onClick={() => {nextEpisode(infos.title)}}>épisode suivant</button>
-          </>
-        ):(
-          <>
-          <p>{infos.description}</p>
-          <button onClick={() => {startFollow(infos.title)}}>commencer à suivre</button> 
-          </>
-        )}
+      <div className="sidePart">
+        <div className="title">
+          <h3>{infos.title}</h3>
+          {infos.nbSeasons !== 1 ? (<p>{infos.nbSeasons} saisons</p>):(<p>{infos.nbSeasons} saison</p>)}
+        </div>
+        <div className="infos">
+          {infos.isFollowed ? (
+            <>
+              <progress max="100" value={calculProgress(infos)}></progress> 
+              <p>Dernier épisode visionné : <br />{`saison ${infos.lastSeen[0]}, épisode ${infos.lastSeen[1]}`}</p>
+              <button onClick={() => {nextEpisode(infos.title)}}>épisode suivant</button>
+            </>
+          ):(
+            <>
+            <p>{infos.description}</p>
+            <button onClick={() => {startFollow(infos.title)}}>commencer à suivre</button> 
+            </>
+          )}
+        </div>
       </div>
     </article>
   )
