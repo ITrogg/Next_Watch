@@ -17,6 +17,7 @@ const data = [
     nbSeasons : 1,
     nbEpisodes : [9],
     isFollowed : false,
+    lastSeen : [0, 0],
   },
   {
     title : "The Witcher",
@@ -46,7 +47,7 @@ const data = [
     nbSeasons : 1,
     nbEpisodes : [8],
     isFollowed : false,
-    lastSeen : [],
+    lastSeen : [0, 0],
   }
 ]
 
