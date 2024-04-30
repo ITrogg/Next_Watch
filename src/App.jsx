@@ -39,6 +39,7 @@ function App() {
     <>
       <Header nav={nav} setNav={setNav}></Header>
       <Main nav={nav} data={data} startFollow={startFollow} nextEpisode={nextEpisode} ></Main>
+      <div className="easterEgg">{data[0].hiddenMessage}</div>
     </>
   )
 }
