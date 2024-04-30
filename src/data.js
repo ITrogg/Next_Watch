@@ -17,7 +17,6 @@ const data = [
     nbSeasons : 1,
     nbEpisodes : [9],
     isFollowed : false,
-    lastSeen : [],
   },
   {
     title : "The Witcher",
@@ -52,4 +51,3 @@ const data = [
 ]
 
 export default data;
-
