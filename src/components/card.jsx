@@ -1,26 +1,21 @@
 import PropTypes from "prop-types";
-import '../styles/card.css'
+import '../styles/card.css';
 
-const Card = ({infos, followedTitles, currentEpisodes}) => {
-  const totalEpisodes = () => {
+const Card = ({infos,  nextEpisode, startFollow}) => {
+
+
+  const calculProgress = () => {
     let total = 0;
     for (let i = 0; i < infos.nbEpisodes.length; i++){
       total = total + infos.nbEpisodes[i];
     }
-    return total
-  }
-  const currentEpisode = currentEpisodes.find((element) => element.title === infos.title);
-  const progress = () => {
-    if (currentEpisode === undefined) {
-      return 0
-    }
-    let count = currentEpisode.current[1];
-    for (let i = 0; i < currentEpisode.current[0]-1; i++) {
+    let count = infos.lastSeen[1];
+    for (let i = 0; i < infos.lastSeen[0]-1; i++) {
       count = count + infos.nbEpisodes[i];      
     }
-    return count;
+    const progress = count/total*100;
+    return progress;
   }
-console.log(followedTitles)
   return (
     <article>
       <img src={infos.img} alt={`Affiche de la dernière saison de ${infos.title}`} />
@@ -29,14 +24,14 @@ console.log(followedTitles)
         {infos.nbSeasons !== 1 ? (<p>{infos.nbSeasons} saisons</p>):(<p>{infos.nbSeasons} saison</p>)}
         {infos.isFollowed ? (
           <>
-          <progress max={totalEpisodes()} value={progress()}></progress> 
-            <p>Dernier épisode visionné : <br />{`saison ${currentEpisode[0]}, épisode ${currentEpisode[1]}`}</p>
-            <button onClick={""}>épisode suivant</button>
+          <progress max="100" value={calculProgress()}></progress> 
+            <p>Dernier épisode visionné : <br />{`saison ${infos.lastSeen[0]}, épisode ${infos.lastSeen[1]}`}</p>
+            <button onClick={() => {nextEpisode(infos.title)}}>épisode suivant</button>
           </>
         ):(
           <>
           <p>{infos.description}</p>
-          <button onClick={""}>commencer à suivre</button>
+          <button onClick={() => {startFollow(infos.title)}}>commencer à suivre</button> 
           </>
         )}
       </div>
@@ -45,6 +40,7 @@ console.log(followedTitles)
 }
 
 Card.propTypes = {
+  data: PropTypes.array,
   infos: PropTypes.shape({
     img: PropTypes.string,
     title: PropTypes.string,
@@ -54,8 +50,9 @@ Card.propTypes = {
     lastSeen : PropTypes.array,
     isFollowed: PropTypes.bool,
   }).isRequired,
-  followedTitles : PropTypes.array,
   currentEpisodes: PropTypes.array,
+  nextEpisode: PropTypes.func,
+  startFollow: PropTypes.func,
 }
 
 export default Card;

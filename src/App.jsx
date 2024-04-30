@@ -6,22 +6,38 @@ import { useState } from 'react'
 
 function App() {
   const [nav, setNav] = useState("All");
-  const [followedTitles, setFollow] = useState(()=> {
-    const followed = Data.filter(series => series.isFollowed).map(series => series.title);
-    return followed;
-  });  
-  const [currentEpisodes, setCurrent] = useState(() => {
-    const episodes = Data.filter(series => series.lastSeen !== undefined).map(series => ({
-      title: series.title,
-      current: series.lastSeen
-    }));
-    return episodes;
-  });
+  const [data, setData] = useState(Data);
+
+  const startFollow = (target) => {
+    setData(data.map(serie => {
+      if (serie.title === target) {
+          return { ...serie, isFollowed: true, lastSeen : [1,0] };
+      }
+      return serie;
+    }))
+
+    console.log("follow");
+  }
+
+  const nextEpisode = (target) => {
+    setData(data.map(serie => {
+      if (serie.title === target){
+        if (serie.lastSeen[1] < serie.nbEpisodes[serie.lastSeen[0]-1]){
+          serie.lastSeen[1] ++;
+        } else {
+          serie.lastSeen[0] ++;
+          serie.lastSeen[1] = 1;
+        }
+      }
+      return serie;
+    }))
+    console.log("next");
+  }
 
   return (
     <>
       <Header nav={nav} setNav={setNav}></Header>
-      <Main nav={nav} data={Data} followedTitles={followedTitles} setFollow={setFollow} currentEpisodes={currentEpisodes} setCurrent={setCurrent} ></Main>
+      <Main nav={nav} data={data} startFollow={startFollow} nextEpisode={nextEpisode} ></Main>
     </>
   )
 }

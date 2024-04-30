@@ -6,8 +6,8 @@ const data = [
     date : 2024,
     nbSeasons : 1,
     nbEpisodes : [8],
-    lastSeen : [1,2],
     isFollowed : true,
+    lastSeen : [1, 0],
   },
   {
     title : "The Last of us",
@@ -17,6 +17,7 @@ const data = [
     nbSeasons : 1,
     nbEpisodes : [9],
     isFollowed : false,
+    lastSeen : [],
   },
   {
     title : "The Witcher",
@@ -46,6 +47,7 @@ const data = [
     nbSeasons : 1,
     nbEpisodes : [8],
     isFollowed : false,
+    lastSeen : [],
   }
 ]
 
